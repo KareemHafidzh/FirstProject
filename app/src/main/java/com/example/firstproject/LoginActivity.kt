@@ -1,31 +1,39 @@
 package com.example.firstproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var dataEmail: Array<String>
     private lateinit var dataPassword: Array<String>
+    private var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
 
         val edtEmail : EditText = findViewById(R.id.edt_email)
         val edtpass : EditText = findViewById(R.id.edt_password)
         val btnlogin : Button = findViewById(R.id.btn_login)
         val btnregister : Button = findViewById(R.id.btn_register)
+        progressBar = findViewById(R.id.progress_bar)
         val btnforgetpass : TextView = findViewById(R.id.forgetpassword)
         val radioremember : RadioButton = findViewById(R.id.rememberme)
 
-
-        val dataEmail = arrayOf("kareem","abdul","hafidzh")
-        val dataPassword =  arrayOf("1234","4321","1423")
+        dataEmail = arrayOf("kareem","abdul","hafidzh")
+        dataPassword =  arrayOf("1234","4321","1423")
 
         btnlogin.setOnClickListener{
+            progressBar?.visibility = View.VISIBLE
             signIn(edtEmail.text.toString(), edtpass.text.toString())
+        }
+
+        btnregister.setOnClickListener{
+            startActivity(Intent(this, RegisterActivity:: class.java))
         }
     }
 
@@ -35,7 +43,11 @@ class MainActivity : AppCompatActivity() {
             val takeDataPass = dataPassword.get(i)
             if (takeDataEmail == email || takeDataPass == password){
                 Toast.makeText(this, "LogedIn", Toast.LENGTH_SHORT).show()
+                progressBar?.visibility = View.GONE
+                startActivity(Intent(this, HomeActivity::class.java))
+                break
             }else{
+                progressBar?.visibility = View.GONE
                 Toast.makeText(this, "Akun Salah", Toast.LENGTH_SHORT).show()
             }
         }

@@ -53,5 +53,33 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart(){
+        super.onStart()
+        Toast.makeText(this, "onStart terpanggil", Toast.LENGTH_SHORT).show()
+    }
 
+    override fun onResume(){
+        super.onResume()
+        Toast.makeText(this, "onResume terpanggil", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRestart(){
+        super.onRestart()
+        Toast.makeText(this, "onRestart terpanggil", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPause(){
+        super.onPause()
+        Toast.makeText(this, "onPause terpanggil", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStop(){
+        super.onStop()
+        Toast.makeText(this, "onStop terpanggil", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy(){
+        super.onDestroy()
+        Toast.makeText(this, "onDestroy terpanggil", Toast.LENGTH_SHORT).show()
+    }
 }
